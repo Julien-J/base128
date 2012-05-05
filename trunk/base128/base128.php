@@ -21,10 +21,10 @@
     ***********************************************************************
  */
 
-$buffer="Erich Pribitzer";
+$buffer="Encode the world";
 
 echo "Base128 encoding:\n";
-echo base128::encode($buffer);
+echo base128::encode($buffer)."\n\n";
 
 echo "Base128 decoding:\n";
 echo base128::decode(base128::encode($buffer));
