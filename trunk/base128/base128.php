@@ -21,10 +21,10 @@
     ***********************************************************************
  */
 
-$buffer="Encode the world";
+$buffer="Erich Pribitzer";
 
 echo "Base128 encoding:\n";
-echo base128::encode($buffer)."\n\n";
+echo base128::encode($buffer);
 
 echo "Base128 decoding:\n";
 echo base128::decode(base128::encode($buffer));
@@ -94,7 +94,7 @@ class base128
                 continue;
             }
             $r1=$nc;
-            $nc=$nc<<$ls;
+            $nc=($nc<<$ls) & 0xFF;
             $nc=$nc|$r;
             $r=$r1>>$rs;
             $rs++;
