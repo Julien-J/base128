@@ -21,13 +21,14 @@
     ***********************************************************************
  */
 
-$buffer="Encode the world";
+$buffer="Encode the World\xC3\xB6\xC4\xA6";
 
 echo "Base128 encoding:\n";
-echo base128::encode($buffer)."\n\n";
-
+$x=base128::encode($buffer);
+echo $x."\n\n";
 echo "Base128 decoding:\n";
-echo base128::decode(base128::encode($buffer));
+$y=base128::decode($x);
+echo $y."\n\n";
 
 class base128
 {
@@ -63,13 +64,12 @@ class base128
                 $rs=7;
             }
             $nc=ord(substr($buffer,$inx,1));
-            $r1=$nc;                // save $nc
-            $nc=$nc<<$ls;           // shift left for $rs
-            $nc=($nc & 0x7f)|$r;    // OR carry bits
-            $r=$r1>>$rs;            // shift right and save carry bits
+            $r1=$nc;                 // save $nc
+            $nc=($nc<<$ls);          // shift left for $rs
+            $nc=($nc & 0x7f)|$r;     // OR carry bits
+            $r=($r1>>$rs) & 0x7F;    // shift right and save carry bits
             $ls++;
             $rs--;
-
             $encoded.=substr($ascii,$nc,1);
         }
         return $encoded;
